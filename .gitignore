@@ -85,14 +85,5 @@ fabric.properties
 # Editor-based Rest Client
 .idea/httpRequests
 
-.gitignore
 .idea/
 platform.iml
-src/main/java/com/freelycar/controller/
-src/main/java/com/freelycar/dao/
-src/main/java/com/freelycar/entity/
-src/main/java/com/freelycar/service/
-src/test/
-web/css/
-web/image/
-web/js/
