@@ -1,0 +1,11 @@
+#角色配置文件，以[Roles]为行开头，配置紧跟下面
+#权限"*"表示通配符，拥有所有权限，对应的如"admin:*"表示拥有admin下所有权限
+#Role配置以逗号(",",在PermissionList中DES_SPLITER参数指定)分隔，第一个参数为Role的Id，与前端写死的Id对应；第二个参数为角色名字；第三个参数为角色描述
+#角色对应权限用分号(";",在PermissionList中PER_SPLITER参数指定)分隔
+#角色权限是否重新读取在config.properties中以reload_roles指定(true/false)，为true时将会在启动时删除原有数据并重新读取并保存
+#角色对应id不要轻易修改，可能会影响到原有admin对应的角色权限
+
+[Roles]
+1,test,superAdmin=*
+2,owner,admin=admin:query;client:*;pay:buycard
+3,insurance,insurance=client:insurance;report:insurance
