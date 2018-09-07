@@ -5,8 +5,8 @@ package com.freelycar.basic.wrapper;
  * @date 2018/9/3
  */
 public class PageInfo {
-    int current = -1;
-    int pageSize = -1;
+    private int current = -1;
+    private int pageSize = -1;
     private String sort;
     private String order;
 

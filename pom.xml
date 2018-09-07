@@ -224,7 +224,7 @@
                 <configuration>
                     <container>
                         <containerId>tomcat8x</containerId>
-                        <home>G:\apache-tomcat-8.5.33</home>
+                        <home>F:\apache-tomcat-8.5.33</home>
                     </container>
                     <configuration>
                         <type>standalone</type>
@@ -232,6 +232,7 @@
                         <properties>
                             <!-- 更改监听端口 -->
                             <cargo.servlet.port>8099</cargo.servlet.port>
+                            <cargo.jvmargs>-Dfile.encoding=UTF-8</cargo.jvmargs>
                         </properties>
                     </configuration>
                 </configuration>

@@ -1,9 +1,6 @@
 package com.freelycar.entity;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -11,6 +8,8 @@ import java.io.Serializable;
  * permission
  * @author tangwei
  */
+@Entity
+@Table
 public class Permission implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -22,6 +21,9 @@ public class Permission implements Serializable {
 
     @Column(name = "roleId")
     private Integer roleId;
+
+    @Column(name = "delStatus")
+    private Integer delStatus;
 
     public Permission() {
     }
@@ -48,5 +50,13 @@ public class Permission implements Serializable {
 
     public void setRoleId(Integer roleId) {
         this.roleId = roleId;
+    }
+
+    public Integer getDelStatus() {
+        return delStatus;
+    }
+
+    public void setDelStatus(Integer delStatus) {
+        this.delStatus = delStatus;
     }
 }

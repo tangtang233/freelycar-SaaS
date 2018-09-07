@@ -174,4 +174,15 @@
     <!-- 使用annotation注解方式配置事务,启用对事务注解的支持 -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
+    <!-- 将配置的所有SessionFactory加载到内存中，在xxxBaseDao中可以根据DBNAME的设置调用不同的SessionFactory -->
+    <bean id="sessionFactoryManage" class="com.freelycar.basic.persistence.util.SessionFactoryManage">
+        <property name="sessionFactoryMap">
+            <map>
+                <entry key="defaultdb">
+                    <ref bean="sessionFactory"/>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
 </beans>

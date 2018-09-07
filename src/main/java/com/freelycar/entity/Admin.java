@@ -42,6 +42,10 @@ public class Admin implements Serializable {
 	@Column(name = "staffId")
 	private Integer staffId;
 
+	@Column(name = "delStatus")
+	private Integer delStatus;
+
+
 	public Admin() {
 	}
 
@@ -115,5 +119,13 @@ public class Admin implements Serializable {
 
 	public void setStaffId(Integer staffId) {
 		this.staffId = staffId;
+	}
+
+	public Integer getDelStatus() {
+		return delStatus;
+	}
+
+	public void setDelStatus(Integer delStatus) {
+		this.delStatus = delStatus;
 	}
 }

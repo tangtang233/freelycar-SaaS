@@ -1,9 +1,11 @@
 package com.freelycar.shiro;
 
-import com.geariot.platform.freelycar.entities.Admin;
-import com.geariot.platform.freelycar.entities.Permission;
-import com.geariot.platform.freelycar.entities.Role;
-import com.geariot.platform.freelycar.service.AdminService;
+
+import com.freelycar.entity.Admin;
+import com.freelycar.entity.Permission;
+import com.freelycar.entity.Role;
+import com.freelycar.service.impl.AdminService;
+import com.freelycar.service.impl.RoleService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.authc.*;
@@ -21,6 +23,8 @@ public class ShiroRealmBaseDatabase extends JdbcRealm {
 
 	@Autowired
 	private AdminService adminService;
+	@Autowired
+	private RoleService roleService;
 
 	private static final Logger log = LogManager.getLogger(ShiroRealmBaseDatabase.class);
 	
@@ -36,7 +40,7 @@ public class ShiroRealmBaseDatabase extends JdbcRealm {
         if (admin == null) {
         	throw new UnknownAccountException("No account found for user [" + username + "]");
         }
-        if(!admin.isCurrent()){
+        if(!admin.getCurrent()){
         	final String message = "Account [" + username + "] is not available.";
         	log.debug(message);
         	throw new LockedAccountException(message);
@@ -60,12 +64,12 @@ public class ShiroRealmBaseDatabase extends JdbcRealm {
         if (admin == null) {
         	throw new UnknownAccountException("No account found for user [" + username + "]");
         }
-        if(!admin.isCurrent()){
+        if(!admin.getCurrent()){
         	final String message = "Account [" + username + "] is not available.";
         	log.debug(message);
         	throw new LockedAccountException(message);
         }
-        Role role = admin.getRole();
+        Role role = roleService.get(admin.getRoleId());
         roleNames.add(role.getRoleName());
         if(this.permissionsLookupEnabled){
         	for(Permission p : role.getPermissions()){
