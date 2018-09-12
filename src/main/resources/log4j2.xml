@@ -55,7 +55,7 @@
 		</Async>
 	</Appenders>
 	<Loggers>
-		<Logger name="com.geariot.platform" level="debug">
+		<Logger name="com.freelycar" level="debug">
 			<AppenderRef ref="async" />
 		</Logger>
 		<Logger name="org.apache.http" level="Warn">

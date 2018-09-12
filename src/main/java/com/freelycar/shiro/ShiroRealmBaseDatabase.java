@@ -4,8 +4,8 @@ package com.freelycar.shiro;
 import com.freelycar.entity.Admin;
 import com.freelycar.entity.Permission;
 import com.freelycar.entity.Role;
-import com.freelycar.service.impl.AdminService;
-import com.freelycar.service.impl.RoleService;
+import com.freelycar.service.impl.AdminServiceImpl;
+import com.freelycar.service.impl.RoleServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.authc.*;
@@ -22,9 +22,9 @@ import java.util.Set;
 public class ShiroRealmBaseDatabase extends JdbcRealm {
 
 	@Autowired
-	private AdminService adminService;
+	private AdminServiceImpl adminService;
 	@Autowired
-	private RoleService roleService;
+	private RoleServiceImpl roleService;
 
 	private static final Logger log = LogManager.getLogger(ShiroRealmBaseDatabase.class);
 	

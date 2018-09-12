@@ -44,10 +44,12 @@ public class PermissionsList {
 						temp.setId(Integer.parseInt(role[0]));
 						temp.setRoleName(role[1]);
 						temp.setDescription(role[2]);
+						temp.setDelStatus(0);
 						Set<Permission> tempPer = new HashSet<>();
 						for(String per : role_per[1].split(PER_SPLITER)){
 							Permission perTemp = new Permission();
 							perTemp.setPermission(per);
+							perTemp.setDelStatus(0);
 							tempPer.add(perTemp);
 						}
 						temp.setPermissions(tempPer);

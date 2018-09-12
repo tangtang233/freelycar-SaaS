@@ -18,7 +18,7 @@ public class CurrentDataBase {
     }
 
     static {
-        LocalSessionFactoryBean localSessionFactoryBean = (LocalSessionFactoryBean) SpringContextUtil.getBean("sessionFactory");
+        LocalSessionFactoryBean localSessionFactoryBean = (LocalSessionFactoryBean) SpringContextUtil.getBean("&sessionFactory");
         currentDialect = StringUtil.getStr(localSessionFactoryBean.getHibernateProperties().get("hibernate.dialect"));
     }
 }

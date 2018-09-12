@@ -1,5 +1,9 @@
 package com.freelycar.entity;
 
+import com.sun.istack.internal.NotNull;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
@@ -10,12 +14,15 @@ import java.util.Set;
  * @author tangwei
  */
 @Entity
-@Table
+@Table(name = "role")
+@DynamicInsert
+@DynamicUpdate
 public class Role implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    @NotNull
+    private Integer id;
 
     @Column(name = "description")
     private String description;
@@ -23,7 +30,7 @@ public class Role implements Serializable {
     @Column(name = "roleName")
     private String roleName;
 
-    @Column(name = "delStatus")
+    @Column(name = "delStatus",nullable = false,columnDefinition="int default 0")
     private Integer delStatus;
 
     @Transient
@@ -70,5 +77,16 @@ public class Role implements Serializable {
 
     public void setPermissions(Set<Permission> permissions) {
         this.permissions = permissions;
+    }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", roleName='" + roleName + '\'' +
+                ", delStatus=" + delStatus +
+                ", permissions=" + permissions +
+                '}';
     }
 }

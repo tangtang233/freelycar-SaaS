@@ -1,7 +1,7 @@
 package com.freelycar.dao.impl;
 
-import com.freelycar.basic.persistence.dao.MainBaseDao;
-import com.freelycar.dao.IAdminDao;
+import com.freelycar.basic.persistence.dao.MainBaseDaoImpl;
+import com.freelycar.dao.AdminDao;
 import com.freelycar.entity.Admin;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +13,7 @@ import java.util.List;
  * @date 2018/9/3
  */
 @Repository("adminDao")
-public class AdminDao extends MainBaseDao<Admin,Integer> implements IAdminDao {
+public class AdminDaoImpl extends MainBaseDaoImpl<Admin,Integer> implements AdminDao {
 
     @Override
     public Admin findAdminByAccount(String account) {
@@ -26,8 +26,11 @@ public class AdminDao extends MainBaseDao<Admin,Integer> implements IAdminDao {
     public void clearRoles() {
         String hql4ClearRoles = "delete from Role";
         String hql4ClearPermissions = "delete from Permission";
-        execteBulk(hql4ClearRoles, null);
-        execteBulk(hql4ClearPermissions, null);
-
+        List<String> sqlList = new ArrayList<>();
+        sqlList.add(hql4ClearRoles);
+        sqlList.add(hql4ClearPermissions);
+        this.executeBatchNative(sqlList);
+//        execteBulk(hql4ClearRoles, null);
+//        execteBulk(hql4ClearPermissions, null);
     }
 }

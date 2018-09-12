@@ -14,9 +14,11 @@ import java.util.Map;
 public class GzipJsFilter implements Filter {
     Map headers = new HashMap();
 
+    @Override
     public void destroy() {
     }
 
+    @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
         if (req instanceof HttpServletRequest) {
             doFilter((HttpServletRequest) req, (HttpServletResponse) res, chain);
@@ -34,6 +36,7 @@ public class GzipJsFilter implements Filter {
         chain.doFilter(request, response);
     }
 
+    @Override
     public void init(FilterConfig config) throws ServletException {
         String headersStr = config.getInitParameter("headers");
         String[] headers = headersStr.split(",");

@@ -1,7 +1,7 @@
 package com.freelycar.shiro;
 
 import com.freelycar.basic.wrapper.ResultJO;
-import com.freelycar.service.impl.AdminService;
+import com.freelycar.service.impl.AdminServiceImpl;
 import com.freelycar.utils.Constants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,8 +19,8 @@ public class InitReadRoles {
 	private static final Logger log = LogManager.getLogger(InitReadRoles.class);
 	
 	@Autowired
-	private AdminService adminService;
-	
+	private AdminServiceImpl adminService;
+
 	@PostConstruct
 	public void readRoles(){
 		if(Constants.RELOAD_ROLES){

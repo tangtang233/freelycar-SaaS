@@ -1,159 +1,65 @@
 package com.freelycar.basic.persistence.service;
 
-import com.freelycar.basic.persistence.dao.IDao;
 import com.freelycar.basic.wrapper.PageInfo;
 import com.freelycar.basic.wrapper.TableResult;
-import org.hibernate.service.spi.ServiceException;
 
 import java.io.Serializable;
 import java.util.List;
 
-public abstract class BaseService<M extends Serializable, PK extends Serializable> implements IBaseService<M, PK> {
-    protected IDao<M, PK> baseDao;
+/**
+ * @author tangwei
+ * @param <M>
+ * @param <PK>
+ */
+public interface BaseService<M extends Serializable, PK extends Serializable> {
+    M save(M model);
 
-    public BaseService() {
-    }
+    void update(M model);
 
-    public abstract void setBaseDao(IDao<M, PK> baseDao);
+    M updateDynamic(M model, String... ignoreProperties) throws Exception;
 
-    @Override
-    public M save(M model) {
-        this.baseDao.save(model);
-        return model;
-    }
+    M updateWithNotNullProperties(M model) throws Exception;
 
-    @Override
-    public void merge(M model) {
-        this.baseDao.merge(model);
-    }
+    void saveOrUpdate(M model);
 
-    @Override
-    public void saveOrUpdate(M model) {
-        this.baseDao.saveOrUpdate(model);
-    }
+    M saveOrUpdateDynamic(M model, String... ignoreProperties);
 
-    @Override
-    public M saveOrUpdateDynamic(M model, String... ignoreProperties) {
-        try {
-            return this.baseDao.saveOrUpdateDynamic(model, ignoreProperties);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new ServiceException(e.getMessage());
-        }
-    }
+    M saveOrUpdateWithNotNullProperties(M model);
 
-    @Override
-    public M saveOrUpdateWithNotNullProperties(M model) {
-        try {
-            return this.baseDao.saveOrUpdateWithNotNullProperties(model);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new ServiceException(e.getMessage());
-        }
-    }
+    void merge(M model);
 
-    @Override
-    public void update(M model) {
-        this.baseDao.update(model);
-    }
+    void destroy(PK id);
 
-    @Override
-    public M updateDynamic(M model, String... ignoreProperties) throws Exception {
-        return this.baseDao.updateDynamic(model, ignoreProperties);
-    }
+    void destroyObject(M model);
 
-    @Override
-    public M updateWithNotNullProperties(M model) throws Exception {
-        try {
-            return this.baseDao.updateWithNotNullProperties(model);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new ServiceException(e.getMessage());
-        }
-    }
+    int deleteList(List<PK> ids);
 
-    @Override
-    public M load(PK id) {
-        return this.baseDao.load(id);
-    }
+    int startUpList(List<PK> ids);
 
-    @Override
-    public void destroy(PK id) {
-        this.baseDao.destroy(id);
-    }
+    int destroyList(List<PK> ids);
 
-    @Override
-    public void destroyObject(M model) {
-        this.baseDao.destroyObject(model);
-    }
+    M get(PK id);
 
-    @Override
-    public int deleteList(List<PK> idList) {
-        return this.baseDao.deleteList(idList);
-    }
+    M load(PK id);
 
-    @Override
-    public int startUpList(List<PK> idList) {
-        return this.baseDao.startUpList(idList);
-    }
+    int countAll();
 
-    @Override
-    public int destroyList(List<PK> idList) {
-        return this.baseDao.destroyList(idList);
-    }
+    List<M> listAll();
 
-    @Override
-    public M get(PK id) {
-        return this.baseDao.get(id);
-    }
+    List<M> listAllWithUndeleted();
 
-    @Override
-    public int countAll() {
-        return this.baseDao.countAll();
-    }
+    TableResult listAllByPage(PageInfo pageInfo);
 
-    @Override
-    public List<M> listAll() {
-        return this.baseDao.listAll();
-    }
+    TableResult listAllUndeletedByPage(PageInfo pageInfo);
 
-    @Override
-    public List<M> listAllWithUndeleted() {
-        return this.baseDao.listAllWithUndeleted();
-    }
+    void flush();
 
-    @Override
-    public TableResult listAllByPage(PageInfo pageInfo) {
-        return this.baseDao.listAllByPage(pageInfo);
-    }
+    void clear();
 
-    @Override
-    public TableResult listAllUndeletedByPage(PageInfo pageInfo) {
-        return this.baseDao.listAllUndeletedByPage(pageInfo);
-    }
+    void evictFromSecondCache(PK id);
 
-    @Override
-    public void flush() {
-        this.baseDao.flush();
-    }
+    void evictAllFromSecondCache();
 
-    @Override
-    public void clear() {
-        this.baseDao.clear();
-    }
-
-    @Override
-    public void evictFromSecondCache(PK id) {
-        this.baseDao.evictFromSecondCache(id);
-    }
-
-    @Override
-    public void evictAllFromSecondCache() {
-        this.baseDao.evictAllFromSecondCache();
-    }
-
-    @Override
-    public boolean contansInSecondCache(PK id) {
-        return this.baseDao.contansInSecondCache(id);
-    }
+    boolean contansInSecondCache(PK id);
 }
+

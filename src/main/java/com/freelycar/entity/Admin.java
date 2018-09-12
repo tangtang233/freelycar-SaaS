@@ -1,5 +1,9 @@
 package com.freelycar.entity;
 
+import com.sun.istack.internal.NotNull;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -10,12 +14,15 @@ import java.util.Date;
  * @author tangwei
  */
 @Entity
-@Table
+@Table(name = "admin")
+@DynamicInsert
+@DynamicUpdate
 public class Admin implements Serializable {
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int id;
+    @NotNull
+	private Integer id;
 
 	@Column(name = "account")
 	private String account;
@@ -42,7 +49,7 @@ public class Admin implements Serializable {
 	@Column(name = "staffId")
 	private Integer staffId;
 
-	@Column(name = "delStatus")
+	@Column(name = "delStatus",nullable = false,columnDefinition="int default 0")
 	private Integer delStatus;
 
 
@@ -127,5 +134,21 @@ public class Admin implements Serializable {
 
 	public void setDelStatus(Integer delStatus) {
 		this.delStatus = delStatus;
+	}
+
+	@Override
+	public String toString() {
+		return "Admin{" +
+				"id=" + id +
+				", account='" + account + '\'' +
+				", comment='" + comment + '\'' +
+				", createDate=" + createDate +
+				", current=" + current +
+				", name='" + name + '\'' +
+				", password='" + password + '\'' +
+				", roleId=" + roleId +
+				", staffId=" + staffId +
+				", delStatus=" + delStatus +
+				'}';
 	}
 }
